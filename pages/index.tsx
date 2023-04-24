@@ -1,10 +1,15 @@
 import Head from 'next/head'
 import Image from "next/image";
 import axios from "axios";
+import { Video } from "@/types";
+import NoResults from "@/components/NoResults";
+import VideoCard from "@/components/VideoCard";
+interface IProps {
+  videos: Video[];
+}
 
-
-
-export default function Home() {
+export default function Home({ videos }: IProps) {
+  console.log(videos);
   return (
     <>
       <Head>
@@ -17,14 +22,22 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1 className="text-3xl font-bold underline">Hello world!</h1>
+        <div className="flex flex-col gap-10 videos h-full">
+          {videos.length ? (
+            videos.map((video: Video) => (
+              <VideoCard post={video} key={video._id} />
+            ))
+          ) : (
+            <NoResults text={"No Videos"} />
+          )}
+        </div>
       </main>
     </>
   );
 }
 
-
-
 export const getServerSideProps = async () => {
-  const response = await axios.get();
+  const { data } = await axios.get(`http://localhost:3000/api/post`);
+
+  return { props: { videos: data } };
 };
