@@ -18,7 +18,7 @@ const Navbar = () => {
     <div className="w-full flex justify-between border-b-2 items-center border-gray-200 py-2 px-4">
       <Link href="/">
         <div className="w-[100px] md:w-[130px] ">
-          <Image className="cursor-pointer" src={Logo} alt="tiktik" />
+          <Image className="cursor-pointer" src={Logo} alt="tiktik" priority />
         </div>
       </Link>
       <div>Search</div>
