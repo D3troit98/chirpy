@@ -6,10 +6,12 @@ const useAuthStore = create(
   persist(
     (set, get) => ({
       userProfile: null,
+      allUsers: [],
       addUser: (user: any) => set({ userProfile: user }),
       removeUser: () => set({ userProfile: null }),
-      fetchAllUser: async () => {
+      fetchAllUsers: async () => {
         const response = await axios.get(`${BASE_URL}/api/users`);
+        set({ allUsers: response.data });
       },
     }),
     {

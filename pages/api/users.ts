@@ -1,17 +1,18 @@
 // Next.js API route support: https://nextjs.org/docs/api-routes/introduction
 import { client } from "@/utils/client";
 import type { NextApiRequest, NextApiResponse } from "next";
-
+import { allUsersQuery } from "@/utils/queries";
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  if (req.method === "POST") {
-    const user = req.body;
+  if (req.method === "GET") {
+    const data = await client.fetch(allUsersQuery());
 
-    //addUser(user)
-    client
-      .createIfNotExists(user)
-      .then(() => res.status(200).json("Login success"));
+    if (data) {
+      res.status(200).json(data);
+    } else {
+      res.json([]);
+    }
   }
 }
