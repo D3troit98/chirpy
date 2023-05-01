@@ -28,7 +28,7 @@ const Comments = ({
   comment,
 }: IProps) => {
   const userProfile = useAuthStore((state: any) => state.userProfile);
-  const fetchAllUsers = useAuthStore((state: any) => state.fetchAllUsers);
+
   const allUsers = useAuthStore((state: any) => state.allUsers);
   return (
     <div className="border-t-2 border-gray-200 pt-4 px-10 bg-[#F8FAF8] border-b-2 lg:pb-0 pb-[100px]">
